@@ -1,0 +1,29 @@
+name: selftest
+# Runs the Worker locally under workerd (wrangler dev, local only, no Cloudflare account) and sends it a real witness
+# request; the reply must pass the reference acceptor. Also checks vendor/ is byte for byte what VENDORED.json pins.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: vendor/ matches VENDORED.json
+        run: |
+          node -e 'const f=require("fs"),c=require("crypto");const v=JSON.parse(f.readFileSync("vendor/VENDORED.json"));let bad=0;for(const[p,h]of Object.entries(v.sha256)){const g=c.createHash("sha256").update(f.readFileSync("vendor/"+p)).digest("hex");if(g!==h){console.log("DIFF "+p);bad=1}else console.log("same "+p)}process.exit(bad)'
+      - run: npm ci
+      - name: Witness under workerd, one real request, reference acceptor
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: |
+          npx wrangler dev --local --local-protocol https --port 8787 --ip 127.0.0.1 > wrangler.log 2>&1 &
+          for i in $(seq 1 60); do grep -q "Ready on" wrangler.log && break; sleep 2; done
+          cat wrangler.log
+          NODE_TLS_REJECT_UNAUTHORIZED=0 node test/smoke.mjs https://127.0.0.1:8787 https://gate.horizonshield.dev

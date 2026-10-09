@@ -1,0 +1,15 @@
+{
+  // A TSUGI re-verification witness. Deploy with `npx wrangler deploy` (or the Deploy to Cloudflare button in README.md).
+  // WITNESS_KV holds the witness key, generated inside the Worker on first use. Recent wrangler creates the namespace
+  // for you on the first deploy when no id is given.
+  "name": "conduct-witness",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  // The vendored reference modules are byte-identical to horizon-shield's and read import.meta.url at load time for
+  // their Node CLI paths, which a bundled Worker does not have. A fixed file URL keeps them loading; no CLI path runs here.
+  "define": { "import.meta.url": "\"file:///conduct-witness-worker/vendor/recovery-v0/module.mjs\"" },
+  "kv_namespaces": [{ "binding": "WITNESS_KV" }],
+  "observability": { "enabled": true }
+}

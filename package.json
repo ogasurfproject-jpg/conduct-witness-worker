@@ -1,0 +1,19 @@
+{
+  "name": "conduct-witness-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A TSUGI re-verification witness for the A2A Conduct Extension v1 on Cloudflare Workers, in one deploy.",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "test": "node test/smoke.mjs"
+  },
+  "dependencies": {
+    "@a2a-js/sdk": "1.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.140.0"
+  }
+}

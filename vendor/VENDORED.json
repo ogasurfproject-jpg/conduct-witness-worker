@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/ogasurfproject-jpg/horizon-shield",
+  "source_commit": "c71095f3062c7411b3a7ed5c628733daf004ba9b",
+  "path": "workers/hs-ledger/nenrin/",
+  "note": "copied byte for byte; the Worker changes none of them",
+  "sha256": {
+    "agreement-v0/agreement_canonical.mjs": "dce5522e63e9e9afdb21319ff179ca595684a021fa7fc4d67c1e1543d144176c",
+    "recovery-v0/drift_witness.mjs": "f050f6728987a5a4002c1423148707e759eae9db1abdeb900780b6c3ea48db2e",
+    "recovery-v0/recovery_schema.mjs": "1cd105117e9f95383fed5ea2bc1c71a357592bc32002eba6aa0c4836b011bce3",
+    "recovery-v0/recovery_verify.mjs": "f28e3049b26b50924576ffe927a6ceec04847b3817db80faa249e46b80200da3",
+    "recovery-v0/witness_draw.mjs": "c5dd3c13b450f11a37e4db25fe31d8070de7f0406b21c52c06ce678c1a9503b4",
+    "recovery-v0/witness_reply.mjs": "d0bc977e2960463aa0c34c47573afed7a872156e5150926d74943d58404cfc3b",
+    "recovery-v0/witness_request.mjs": "fa1058945492aeae79543f2b596b2d8bc44cde33f0e390de58a7ccec4a6ba547",
+    "recovery-v0/witness_ssrf_guard.mjs": "74c28ba7de4ad2f418f99817803c1df19100ea79163c9bae28b38f7b991bb73f",
+    "task-delegation-bind-v0/ed25519_key.mjs": "f111bcc58b6b21f09f8cdcddb1c9dbaacad02ccf86cc22f110287eb0f29e63bd"
+  }
+}
